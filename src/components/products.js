@@ -59,24 +59,35 @@ function Products() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setEditedProduct(prevProduct => ({
-      ...prevProduct,
+    setEditedProduct(prevEditedProduct => ({
+      ...prevEditedProduct,
       [name]: value
     }));
   };
+  
 
   useEffect(() => {
-    let sortedData = [...data]; // Create a copy of the original data
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://my-json-server.typicode.com/Jugalmehra1958/demodb/products");
+        const data = response.data;
+        let sortedData = [...data];
   
-    if (sortByPrice) {
-      sortedData.sort((a, b) => a.price - b.price); // Sort by price in ascending order
-    } else {
-      sortedData.sort((a, b) => b.price - a.price); // Sort by price in descending order
-    }
+        if (sortByPrice) {
+          sortedData.sort((a, b) => a.price - b.price);
+        } else {
+          sortedData.sort((a, b) => b.price - a.price);
+        }
   
-    setData(sortedData); // Update the sorted data in state
-  }, [data, sortByPrice]);
-
+        setData(sortedData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
+  }, [sortByPrice]);
+  
   const handleSortByPrice = () => {
     setSortByPrice(!sortByPrice);
   };
