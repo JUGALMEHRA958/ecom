@@ -1,0 +1,18 @@
+.addProduct {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    margin-bottom: 5px;
+    background-color: tra;
+  }
+  
+  .input {
+    margin-bottom: 10px;
+  }
+
+  #addbtn{
+    color: white;
+    background-color: black;
+  }
