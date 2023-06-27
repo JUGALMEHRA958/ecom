@@ -4,21 +4,22 @@ import Navbar from './components/Navbar';
 import Products from './components/products';
 import Addproduct from './components/Addproduct';
 import { useSelector } from 'react-redux';
+import ProductPage from "./components/ProductPage"
 import Cart from './components/Cart';
+import DetailsShow from './components/DetailsShow';
 function App() {
-console.log(useSelector,"useSelector 8");
   const selectedTab = useSelector(state => state.tab.selectedTab);
-  console.log(selectedTab , "99")
   return (
     <div>
       <Navbar />
       {selectedTab === 'products' && <Products />}
       {selectedTab === 'addProduct' && <Addproduct />}
+      {selectedTab === "detail" && <DetailsShow/>}
       {selectedTab === "cart" && (
         <div>
           <Cart />
-          
         </div>
+        
       )}
     </div>
   );

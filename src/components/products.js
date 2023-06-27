@@ -3,7 +3,8 @@ import axios from 'axios';
 import "./products.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedTab } from '../redux/tabActions';
 function addToCart(product) {
   // Retrieve existing cart array from localStorage or create an empty array
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -47,6 +48,8 @@ function ProductPopup({ product, onClose, onAddToCart }) {
 }
 
 function Products() {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState([]);
   const [product, setProduct] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -142,8 +145,10 @@ function Products() {
   };
 
   const openPopup = (product) => {
-    setViewProduct(product);
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+    dispatch(setSelectedTab("detail"));
   };
+  
 
   const closePopup = () => {
     setViewProduct(null);
@@ -240,6 +245,7 @@ function Products() {
         </div>
       ))}
       {viewProduct && (
+        
       <div className="popup">
         <div className="popup-content">
           <button className="close-button" onClick={closePopup}>

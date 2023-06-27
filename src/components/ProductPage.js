@@ -7,7 +7,7 @@ function ProductPage({ product }) {
   const handleGoBack = () => {
     // history.goBack();
   };
-
+  console.log("Hi");
   return (
     <div>
       <h2>{product.title}</h2>
