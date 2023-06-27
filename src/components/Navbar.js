@@ -11,6 +11,9 @@ function Navbar() {
     dispatch(setSelectedTab(tab));
   };
 
+  const cartItems = localStorage.getItem('cart');
+  const numberOfItemsInCart = cartItems ? JSON.parse(cartItems).length : 0;
+
   return (
     <div className="navbar">
       <div className="left-section">
@@ -19,6 +22,12 @@ function Navbar() {
         </div>
         <div className={`tab ${selectedTab === 'addProduct' ? 'active' : ''}`} onClick={() => handleTabClick('addProduct')}>
           Add Product
+        </div>
+        <p>
+          Number of items in cart: {numberOfItemsInCart}
+        </p>        
+        <div className={`tab ${selectedTab === 'cart' ? 'active' : ''}`} onClick={() => handleTabClick('cart')}>
+          Cart
         </div>
       </div>
       <div className="right-section">
